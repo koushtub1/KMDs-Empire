@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unique Number Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .container {
+            max-width: 400px;
+            text-align: center;
+        }
+        .input-box {
+            margin-top: 10px;
+        }
+        .output {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>HELLO USERS</h2>
+
+    <div>
+        <label>INPUT: <input type="number" id="userInput" placeholder="Enter a number 1-100"></label>
+        <button onclick="saveInput()">Submit</button>
+    </div>
+
+    <div class="output">
+        OUTPUT: <span id="outputMessage"></span>
+    </div>
+</div>
+
+<script>
+    let enteredValues = new Set();
+    const maxEntries = 5;
+
+    function saveInput() {
+        const inputElement = document.getElementById('userInput');
+        const outputElement = document.getElementById('outputMessage');
+        const userInput = parseInt(inputElement.value);
+
+        if (enteredValues.size >= maxEntries) {
+            outputElement.textContent = "Maximum entries reached!";
+            return;
+        }
+
+        if (isNaN(userInput) || userInput < 1 || userInput > 100) {
+            outputElement.textContent = "Please enter a valid number between 1 and 100.";
+        } else if (enteredValues.has(userInput)) {
+            outputElement.textContent = "This number has already been entered.";
+        } else {
+            enteredValues.add(userInput);
+            outputElement.textContent = "Successful entry!";
+        }
+
+        inputElement.value = ""; // Clear input field
+    }
+</script>
+
+</body>
+</html>
